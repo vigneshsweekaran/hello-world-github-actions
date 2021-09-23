@@ -39,32 +39,41 @@ jobs:
       - name: Deploying to Dev environment
         uses: appleboy/ssh-action@master
         if: ${{ github.ref == 'refs/heads/dev' }}
+        env:
+          TAG: ${{ GITHUB_RUN_NUMBER }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
+          envs: TAG
           script: |
             docker rm -f hello-world-dev || true
-            docker run --name hello-world-dev -d -p 9003:8080 vigneshsweekaran/hello-world-github-actions:$GITHUB_RUN_NUMBER
+            docker run --name hello-world-dev -d -p 9003:8080 vigneshsweekaran/hello-world-github-actions:$TAG
             
       - name: Deploying to Staging environment
         uses: appleboy/ssh-action@master
         if: ${{ github.ref == 'refs/heads/staging' }}
+        env:
+          TAG: ${{ GITHUB_RUN_NUMBER }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
+          envs: TAG
           script: |
             docker rm -f hello-world-staging || true
-            docker run --name hello-world-staging -d -p 9004:8080 vigneshsweekaran/hello-world-github-actions:$GITHUB_RUN_NUMBER
+            docker run --name hello-world-staging -d -p 9004:8080 vigneshsweekaran/hello-world-github-actions:$TAG
             
       - name: Deploying to Prod environment
         uses: appleboy/ssh-action@master
         if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          TAG: ${{ GITHUB_RUN_NUMBER }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
+          envs: TAG
           script: |
             docker rm -f hello-world-prod || true
-            docker run --name hello-world-prod -d -p 9005:8080 vigneshsweekaran/hello-world-github-actions:$GITHUB_RUN_NUMBER
+            docker run --name hello-world-prod -d -p 9005:8080 vigneshsweekaran/hello-world-github-actions:$TAG
