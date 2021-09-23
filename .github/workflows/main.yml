@@ -54,7 +54,7 @@ jobs:
         uses: appleboy/ssh-action@master
         if: ${{ github.ref == 'refs/heads/staging' }}
         env:
-          TAG: ${{ GITHUB_RUN_NUMBER }}
+          TAG: $GITHUB_RUN_NUMBER
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -68,7 +68,7 @@ jobs:
         uses: appleboy/ssh-action@master
         if: ${{ github.ref == 'refs/heads/main' }}
         env:
-          TAG: ${{ GITHUB_RUN_NUMBER }}
+          TAG: $GITHUB_RUN_NUMBER
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
