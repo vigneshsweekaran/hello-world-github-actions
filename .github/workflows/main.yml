@@ -36,8 +36,9 @@ jobs:
       - name: Push Docker Image
         run: docker push vigneshsweekaran/hello-world-github-actions:latest
         
-      - name: executing remote ssh commands using ssh key
+      - name: Deploying to Dev environment
         uses: appleboy/ssh-action@master
+        if: ${{ github.ref == 'refs/heads/dev' }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -45,5 +46,27 @@ jobs:
           script: |
             docker rm -f hello-world-dev || true
             docker run --name hello-world-dev -d -p 9003:8080 vigneshsweekaran/hello-world-github-actions:latest
+            
+      - name: Deploying to Staging environment
+        uses: appleboy/ssh-action@master
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            docker rm -f hello-world-staging || true
+            docker run --name hello-world-staging -d -p 9004:8080 vigneshsweekaran/hello-world-github-actions:latest
+            
+      - name: Deploying to Prod environment
+        uses: appleboy/ssh-action@master
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            docker rm -f hello-world-prod || true
+            docker run --name hello-world-prod -d -p 9005:8080 vigneshsweekaran/hello-world-github-actions:latest
 
           
