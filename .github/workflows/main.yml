@@ -35,4 +35,15 @@ jobs:
 
       - name: Push Docker Image
         run: docker push vigneshsweekaran/hello-world-github-actions:latest
+        
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            docker rm -f hello-world-dev || true
+            docker run --name hello-world-dev -d -p 9003:8080 vigneshsweekaran/hello-world-github-actions:latest
+
           
