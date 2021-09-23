@@ -23,5 +23,5 @@ jobs:
         run: |
           mvn --version
           mvn clean package
-          ll target
+          ls -l target
           
