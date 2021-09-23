@@ -1,0 +1,27 @@
+name: CI/CD pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - staging
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.2
+        with:
+          maven-version: 3.6
+      
+      - name: Mavne Build
+        run: |
+          mvn --version
+          mvn clean package
+          ll target
+          
