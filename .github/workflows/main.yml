@@ -40,7 +40,7 @@ jobs:
         uses: appleboy/ssh-action@master
         if: ${{ github.ref == 'refs/heads/dev' }}
         env:
-          TAG: ${{ github.GITHUB_RUN_NUMBER }}
+          TAG: ${{ env.GITHUB_RUN_NUMBER }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -48,6 +48,8 @@ jobs:
           envs: TAG
           script: |
             echo "TAG - ${TAG}"
+            echo "TAG - ${github.GITHUB_RUN_NUMBER}"
+            echo "TAG - ${env.GITHUB_RUN_NUMBER}"
             docker rm -f hello-world-dev || true
             docker run --name hello-world-dev -d -p 9003:8080 vigneshsweekaran/hello-world-github-actions:$TAG
             
