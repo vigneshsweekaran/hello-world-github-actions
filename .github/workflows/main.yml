@@ -40,7 +40,7 @@ jobs:
         uses: appleboy/ssh-action@master
         if: ${{ github.ref == 'refs/heads/dev' }}
         env:
-          TAG: $GITHUB_RUN_NUMBER
+          TAG: ${{ github.GITHUB_RUN_NUMBER }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
