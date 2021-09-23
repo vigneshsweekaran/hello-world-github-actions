@@ -45,6 +45,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             docker rm -f hello-world-dev || true
+            docker pull vigneshsweekaran/hello-world-github-actions:latest
             docker run --name hello-world-dev -d -p 9003:8080 vigneshsweekaran/hello-world-github-actions:latest
             
       - name: Deploying to Staging environment
