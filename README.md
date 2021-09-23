@@ -1,1 +1,3 @@
-# hello-world-github-actions
+# maven-project
+
+Simple Maven Project
