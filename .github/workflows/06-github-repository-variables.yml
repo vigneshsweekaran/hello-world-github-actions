@@ -21,10 +21,10 @@ jobs:
         run: |
           mvn clean package
           pwd && ls -l
-          ls -l ${{ env.MVN_TARGET_FOLDER }}
-          du -sh ${{ env.MVN_TARGET_FOLDER }}
-          du -sh ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}
+          ls -l ${{ vars.MVN_TARGET_FOLDER }}
+          du -sh ${{ vars.MVN_TARGET_FOLDER }}
+          du -sh ${{ vars.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}
       - name: Copying war file to tmp folder
         run: |
-          cp ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }} ${{ env.COPY_TARGET_FOLDER }}
-          ls -l ${{ env.COPY_TARGET_FOLDER }}
+          cp ${{ vars.MVN_TARGET_FOLDER }}/${{ vars.MVN_WAR_FILE_NAME }} ${{ vars.COPY_TARGET_FOLDER }}
+          ls -l ${{ vars.COPY_TARGET_FOLDER }}
