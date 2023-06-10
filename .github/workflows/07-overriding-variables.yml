@@ -1,0 +1,40 @@
+name: 07-overriding-variables
+
+on: workflow_dispatch
+
+env:
+  MVN_TARGET_FOLDER: "target"
+  MVN_WAR_FILE_NAME: "hello-world.war"
+  COPY_TARGET_FOLDER: "/tmp"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Printing predfined variables
+        run: |
+          echo "$GITHUB_WORKFLOW"
+          echo "$GITHUB_ACTION"
+          echo "$GITHUB_REPOSITORY"
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.6.0
+      - name: Maven Build
+        run: |
+          mvn clean package
+          pwd && ls -l
+          ls -l ${{ env.MVN_TARGET_FOLDER }}
+          du -sh ${{ env.MVN_TARGET_FOLDER }}
+          du -sh ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}
+      - name: Copying war file to tmp folder
+        run: |
+          cp ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }} ${{ env.COPY_TARGET_FOLDER }}
+          ls -l ${{ env.COPY_TARGET_FOLDER }}
+      - name: Copying war file to /opt folder
+        env:
+          COPY_TARGET_FOLDER: "/opt"
+        run: |
+          cp ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }} ${{ env.COPY_TARGET_FOLDER }}
