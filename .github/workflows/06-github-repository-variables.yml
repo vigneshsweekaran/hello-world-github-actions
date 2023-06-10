@@ -23,7 +23,7 @@ jobs:
           pwd && ls -l
           ls -l ${{ vars.MVN_TARGET_FOLDER }}
           du -sh ${{ vars.MVN_TARGET_FOLDER }}
-          du -sh ${{ vars.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}
+          du -sh ${{ vars.MVN_TARGET_FOLDER }}/${{ vars.MVN_WAR_FILE_NAME }}
       - name: Copying war file to tmp folder
         run: |
           cp ${{ vars.MVN_TARGET_FOLDER }}/${{ vars.MVN_WAR_FILE_NAME }} ${{ vars.COPY_TARGET_FOLDER }}
