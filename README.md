@@ -12,7 +12,7 @@ Topic|Workflow|
 |How to use self-hosted runner for jobs|03-self-hosted-runner|
 |How to read predefined variables|04-predefined-variables|
 |How to define and read variables|05-variables|
-|How to read variables defined in GITHUB variables|06-github-variables|
+|How to read variables defined in GITHUB variables|06-github-repository-variables|
 |How to override the variables|07-overriding-variables|
 |How to define parallel jobs|08-parallel-jobs|
 |How to depend on another job|09-needs|
