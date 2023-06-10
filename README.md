@@ -10,13 +10,15 @@ Topic|Workflow|
 |First pipeline|01-first-pipeline|
 |How to build a maven project|02-maven-build|
 |How to use self-hosted runner for jobs|03-self-hosted-runner|
-|How to define and read variables|04-variables|
-|How to override the variables|05-overriding-variables|
-|How to define parallel jobs|06-parallel-jobs|
-|How to depend on another job|07-needs|
-|How to pass artifacts from one job to another|08-artifacts|
-|How to use different runner for jobs or stages|09-different-runners|
-|How to define and read secrets|10-secrets|
+|How to read predefined variables|04-predefined-variables|
+|How to define and read variables|05-variables|
+|How to read variables defined in GITHUB variables|06-github-variables|
+|How to override the variables|07-overriding-variables|
+|How to define parallel jobs|08-parallel-jobs|
+|How to depend on another job|09-needs|
+|How to pass artifacts from one job to another|10-artifacts|
+|How to use different runner for jobs or stages|11-different-runners|
+|How to define and read secrets|12-secrets|
 |How to build a maven project and cache the dependencies|maven-build-cache|
 |How to build a Docerfile and push to dockerhub|maven-docker-build-push|
 |How to build a Docerfile and push to Jfrog|maven-docker-build-push-jfrog|

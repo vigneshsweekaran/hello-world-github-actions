@@ -1,0 +1,17 @@
+name: 04-predefined-variables
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Printing predfined variables
+        run: |
+          echo "Workflow name : $GITHUB_WORKFLOW"
+          echo "Action name : $GITHUB_ACTION"
+          echo "Github repository name : $GITHUB_REPOSITORY"
+          echo "Trigger event name : $GITHUB_EVENT_NAME"
+          echo "Branch Name : $GITHUB_REF_NAME"
+          echo "Runner name : $RUNNER_NAME"
+          echo "Worflow workspace: : $GITHUB_WORKSPACE"

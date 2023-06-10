@@ -1,4 +1,4 @@
-name: 03-self-hosted-runner
+name: 05-variables
 
 on: workflow_dispatch
 
