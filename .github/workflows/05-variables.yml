@@ -29,6 +29,7 @@ jobs:
           ls -l ${{ env.MVN_TARGET_FOLDER }}
           du -sh ${{ env.MVN_TARGET_FOLDER }}
           du -sh ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}
-      - name: Copying war file to ${{ env.COPY_TARGET_FOLDER }} folder
+      - name: Copying war file to tmp folder
         run: |
           cp ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }} ${{ env.COPY_TARGET_FOLDER }}
+          ls -l ${{ env.COPY_TARGET_FOLDER }}
