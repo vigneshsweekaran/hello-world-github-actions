@@ -32,9 +32,12 @@ jobs:
       - name: Copying war file to tmp folder
         run: |
           cp ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }} ${{ env.COPY_TARGET_FOLDER }}
+          pwd
           ls -l ${{ env.COPY_TARGET_FOLDER }}
       - name: Copying war file to /opt folder
         env:
           COPY_TARGET_FOLDER: "/opt"
         run: |
           cp ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }} ${{ env.COPY_TARGET_FOLDER }}
+          pwd
+          ls -l ${{ env.COPY_TARGET_FOLDER }}
