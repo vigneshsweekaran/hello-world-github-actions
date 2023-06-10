@@ -5,7 +5,7 @@ Simple Maven Project
 ## Github Actions Training
 Branch: dev
 
-Topic|Workflow| 
+Topic|Workflow|
 |----|-----|
 |First pipeline|01-first-pipeline|
 |How to build a maven project|02-maven-build|
