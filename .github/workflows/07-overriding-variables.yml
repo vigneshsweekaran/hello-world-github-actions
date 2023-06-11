@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Printing predfined variables
+      - name: Printing predefined variables
         run: |
           echo "$GITHUB_WORKFLOW"
           echo "$GITHUB_ACTION"
