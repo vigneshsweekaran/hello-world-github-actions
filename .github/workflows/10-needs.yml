@@ -1,4 +1,4 @@
-name: 10-different-runners-for-jobs
+name: 10-needs
 
 
 on: workflow_dispatch
