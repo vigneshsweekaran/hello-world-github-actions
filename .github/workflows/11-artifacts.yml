@@ -47,6 +47,6 @@ jobs:
           name: hello-world-war
       - name: Checking war file size
         run: |
-          pwd && ls -l
+          pwd
           ls -l ${{ env.MVN_WAR_FILE_NAME }}
           du -sh ${{ env.MVN_WAR_FILE_NAME }}

@@ -5,7 +5,7 @@ on: workflow_dispatch
 
 env:
   MVN_TARGET_FOLDER: "target"
-  MVN_WAR_FILE_NAME: "hello-world.war"
+  MVN_WAR_FILE_NAME: "hello-world*.war"
 
 jobs:
   build-info:
@@ -39,6 +39,6 @@ jobs:
     steps:
       - name: Checking war file size
         run: |
-          pwd && ls -l
+          pwd
           ls -l ${{ env.MVN_TARGET_FOLDER }}
           du -sh ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}

@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   MVN_TARGET_FOLDER: "target"
-  MVN_WAR_FILE_NAME: "hello-world.war"
+  MVN_WAR_FILE_NAME: "hello-world*.war"
   COPY_TARGET_FOLDER: "/tmp"
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
       - name: Maven Build
         run: |
           mvn clean package
-          pwd && ls -l
+          pwd
           ls -l ${{ env.MVN_TARGET_FOLDER }}
           du -sh ${{ env.MVN_TARGET_FOLDER }}
           du -sh ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}

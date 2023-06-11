@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   MVN_TARGET_FOLDER: "target"
-  MVN_WAR_FILE_NAME: "hello-world.war"
+  MVN_WAR_FILE_NAME: "hello-world*.war"
   COPY_TARGET_FOLDER: "/tmp"
 
 jobs:
