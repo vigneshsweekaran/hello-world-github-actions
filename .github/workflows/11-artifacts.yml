@@ -37,7 +37,7 @@ jobs:
       - uses: actions/upload-artifact
         with:
           name: hello-world-war
-          path: ${{ env.MVN_TARGET_FOLDER }}/${{ env.MVN_WAR_FILE_NAME }}
+          path: target/hello-world.war
   check-war-file-size:
     runs-on: ubuntu-latest
     needs: build
