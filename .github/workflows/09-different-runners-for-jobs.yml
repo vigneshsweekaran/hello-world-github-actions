@@ -1,9 +1,7 @@
-name: 10-different-runners-for-jobs
+name: 09-different-runners-for-jobs
 
 
 on: workflow_dispatch
-
-runs-on: ubuntu-latest
 
 env:
   MVN_TARGET_FOLDER: "target"
@@ -11,18 +9,19 @@ env:
 
 jobs:
   build-info:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Printing predefined variables
         run: |
           echo "Workflow name : $GITHUB_WORKFLOW"
-          echo "Action name : $GITHUB_ACTION"
           echo "Github repository name : $GITHUB_REPOSITORY"
           echo "Trigger event name : $GITHUB_EVENT_NAME"
           echo "Branch Name : $GITHUB_REF_NAME"
           echo "Runner name : $RUNNER_NAME"
-          echo "Workflow workspace: : $GITHUB_WORKSPACE"
+          echo "Workflow triggered by : $GITHUB_ACTOR"
+          echo "Workflow run number: $GITHUB_RUN_NUMBER"
   build:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,19 +34,8 @@ jobs:
           mvn clean package
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
-  predefined-variables:
-    steps:
-      - name: Printing predefined variables
-        run: |
-          echo "Workflow name : $GITHUB_WORKFLOW"
-          echo "Github repository name : $GITHUB_REPOSITORY"
-          echo "Trigger event name : $GITHUB_EVENT_NAME"
-          echo "Branch Name : $GITHUB_REF_NAME"
-          echo "Runner name : $RUNNER_NAME"
-          echo "Workflow triggered by : $GITHUB_ACTOR"
-          echo "Workflow run number: $GITHUB_RUN_NUMBER"
   check-war-file-size:
-    needs: build
+    runs-on: ubuntu-latest
     steps:
       - name: Printing predefined variables
         run: |
