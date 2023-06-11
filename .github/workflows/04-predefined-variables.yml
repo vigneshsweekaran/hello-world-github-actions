@@ -14,4 +14,4 @@ jobs:
           echo "Trigger event name : $GITHUB_EVENT_NAME"
           echo "Branch Name : $GITHUB_REF_NAME"
           echo "Runner name : $RUNNER_NAME"
-          echo "Worflow workspace: : $GITHUB_WORKSPACE"
+          echo "Workflow workspace: : $GITHUB_WORKSPACE"
