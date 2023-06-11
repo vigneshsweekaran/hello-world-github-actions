@@ -35,7 +35,7 @@ jobs:
           mvn clean package
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
-  Checking the size of war file:
+  check-war-file-size:
     steps:
       - name: Printing predefined variables
         run: |

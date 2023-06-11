@@ -46,7 +46,7 @@ jobs:
           echo "Runner name : $RUNNER_NAME"
           echo "Workflow triggered by : $GITHUB_ACTOR"
           echo "Workflow run number: $GITHUB_RUN_NUMBER"
-  Checking the size of war file:
+  check-war-file-size:
     needs: build
     steps:
       - name: Printing predefined variables
