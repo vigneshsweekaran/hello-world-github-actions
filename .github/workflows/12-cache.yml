@@ -1,0 +1,45 @@
+name: 12-cache
+
+
+on: workflow_dispatch
+
+env:
+  MVN_TARGET_FOLDER: "target"
+  MVN_WAR_FILE_NAME: "hello-world.war"
+
+jobs:
+  build-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing build information
+        run: |
+          echo "Workflow name : $GITHUB_WORKFLOW"
+          echo "Action name : $GITHUB_ACTION"
+          echo "Github repository name : $GITHUB_REPOSITORY"
+          echo "Trigger event name : $GITHUB_EVENT_NAME"
+          echo "Branch Name : $GITHUB_REF_NAME"
+          echo "Runner name : $RUNNER_NAME"
+          echo "Workflow workspace: : $GITHUB_WORKSPACE"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.6.0
+      - name: Maven Build
+        run: |
+          mvn clean package
+          pwd && ls -l
+          ls -l ${{ env.MVN_TARGET_FOLDER }}
+      - name: Cache maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: .m2
+          key: maven-dependencies
+      - uses: actions/upload-artifact@v3.1.2
+        with:
+          name: hello-world-war
+          path: target/hello-world.war
