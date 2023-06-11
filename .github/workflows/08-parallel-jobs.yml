@@ -10,7 +10,7 @@ jobs:
   build-info:
     runs-on: ubuntu-latest
     steps:
-      - name: Printing predefined variables
+      - name: Printing build information
         run: |
           echo "Workflow name : $GITHUB_WORKFLOW"
           echo "Github repository name : $GITHUB_REPOSITORY"
@@ -37,7 +37,7 @@ jobs:
   check-war-file-size:
     runs-on: ubuntu-latest
     steps:
-      - name: Printing predefined variables
+      - name: Checking war file size
         run: |
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
