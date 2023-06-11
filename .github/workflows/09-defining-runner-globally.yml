@@ -2,6 +2,8 @@ name: 08-parallel-jobs
 
 on: workflow_dispatch
 
+runs-on: ubuntu-latest
+
 env:
   MVN_TARGET_FOLDER: "target"
   MVN_WAR_FILE_NAME: "hello-world.war"
@@ -19,9 +21,7 @@ jobs:
           echo "Runner name : $RUNNER_NAME"
           echo "Workflow triggered by : $GITHUB_ACTOR"
           echo "Workflow run number: $GITHUB_RUN_NUMBER"
-
   build:
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,7 +35,6 @@ jobs:
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
   Checking the size of war file:
-    runs-on: ubuntu-latest
     steps:
       - name: Printing predefined variables
         run: |

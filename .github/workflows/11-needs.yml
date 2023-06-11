@@ -1,6 +1,9 @@
-name: 08-parallel-jobs
+name: 10-different-runners-for-jobs
+
 
 on: workflow_dispatch
+
+runs-on: ubuntu-latest
 
 env:
   MVN_TARGET_FOLDER: "target"
@@ -13,15 +16,13 @@ jobs:
       - name: Printing predefined variables
         run: |
           echo "Workflow name : $GITHUB_WORKFLOW"
+          echo "Action name : $GITHUB_ACTION"
           echo "Github repository name : $GITHUB_REPOSITORY"
           echo "Trigger event name : $GITHUB_EVENT_NAME"
           echo "Branch Name : $GITHUB_REF_NAME"
           echo "Runner name : $RUNNER_NAME"
-          echo "Workflow triggered by : $GITHUB_ACTOR"
-          echo "Workflow run number: $GITHUB_RUN_NUMBER"
-
+          echo "Workflow workspace: : $GITHUB_WORKSPACE"
   build:
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,8 +35,19 @@ jobs:
           mvn clean package
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
+  predefined-variables:
+    steps:
+      - name: Printing predefined variables
+        run: |
+          echo "Workflow name : $GITHUB_WORKFLOW"
+          echo "Github repository name : $GITHUB_REPOSITORY"
+          echo "Trigger event name : $GITHUB_EVENT_NAME"
+          echo "Branch Name : $GITHUB_REF_NAME"
+          echo "Runner name : $RUNNER_NAME"
+          echo "Workflow triggered by : $GITHUB_ACTOR"
+          echo "Workflow run number: $GITHUB_RUN_NUMBER"
   Checking the size of war file:
-    runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Printing predefined variables
         run: |
