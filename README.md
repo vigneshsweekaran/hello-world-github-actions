@@ -1,6 +1,6 @@
 # maven-project
 
-https://github.com/vigneshsweekaran/hello-world/actions/workflows/11-artifacts.yml/badge.svg
+![example workflow](https://github.com/vigneshsweekaran/hello-world/actions/workflows/11-artifacts.yml/badge.svg)
 
 Simple Maven Project
 
