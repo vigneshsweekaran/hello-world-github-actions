@@ -1,6 +1,5 @@
 name: 12-cache
 
-
 on: workflow_dispatch
 
 env:
@@ -30,16 +29,16 @@ jobs:
         uses: stCarolas/setup-maven@v4.5
         with:
           maven-version: 3.6.0
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-dependencies
       - name: Maven Build
         run: |
           mvn clean package
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
-      - name: Cache maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: maven-dependencies
       - uses: actions/upload-artifact@v3.1.2
         with:
           name: hello-world-war
