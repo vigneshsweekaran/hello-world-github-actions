@@ -1,0 +1,57 @@
+name: 12-cache
+
+on: workflow_dispatch
+
+env:
+  MVN_TARGET_FOLDER: "target"
+  MVN_WAR_FILE_NAME: "hello-world-*.war"
+
+jobs:
+  build-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing build information
+        run: |
+          echo "Workflow name : $GITHUB_WORKFLOW"
+          echo "Action name : $GITHUB_ACTION"
+          echo "Github repository name : $GITHUB_REPOSITORY"
+          echo "Trigger event name : $GITHUB_EVENT_NAME"
+          echo "Branch Name : $GITHUB_REF_NAME"
+          echo "Runner name : $RUNNER_NAME"
+          echo "Workflow workspace: : $GITHUB_WORKSPACE"
+  build:
+    runs-on: ubuntu-latest
+    needs: build-info
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.6.0
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-dependencies
+      - name: Maven Build
+        run: |
+          mvn clean package
+          pwd && ls -l
+          ls -l ${{ env.MVN_TARGET_FOLDER }}
+      - uses: actions/upload-artifact@v3.1.2
+        with:
+          name: hello-world-war
+          path: target/hello-world-*.war
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Tomcat
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: ${{ env.MVN_WAR_FILE_NAME }}
+          target: /var/lib/tomcat/webapps/hello-world-pipeline
