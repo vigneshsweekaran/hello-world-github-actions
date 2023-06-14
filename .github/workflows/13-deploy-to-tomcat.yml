@@ -64,7 +64,9 @@ jobs:
           path: ~/.m2/repository
           key: maven-dependencies
       - name: Configure maven settings
-        run: echo ${{ secrets.MAVEN_SETTINGS }} > ${{ env.MVN_SETTINGS_PATH }}
+        env:
+          MAVEN_SETTINGS: ${{ secrets.MAVEN_SETTINGS }}
+        run: echo ${{ env.MAVEN_SETTINGS }} > ${{ env.MVN_SETTINGS_PATH }}
       - name: Deploy to tomcat
         run: |
           mvn cargo:deploy
