@@ -52,6 +52,7 @@ jobs:
         uses: actions/download-artifact@v2.1.1
         with:
           name: hello-world-war
+          path: target
       - name: Setup Maven
         uses: stCarolas/setup-maven@v4.5
         with:
