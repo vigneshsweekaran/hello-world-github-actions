@@ -20,8 +20,9 @@ Topic|Workflow|
 |How to use different runner for jobs or stages|09-different-runners-for-jobs|
 |How to depend on another job|10-needs|
 |How to pass artifacts from one job to another job|11-artifacts|
-|How to build a maven project and cache the dependencies|maven-build-cache|
-|How to define and read secrets|12-secrets|
+|How to build a maven project and cache the dependencies|12-cache|
+|How to deploy to tomcat using maven from github action|13-deploy-to-tomcat|
+|How to define and read secrets|secrets|
 |How to build a Docerfile and push to dockerhub|maven-docker-build-push|
 |How to build a Docerfile and push to Jfrog|maven-docker-build-push-jfrog|
 |How to deploy the container to a server|maven-build-deploy|
