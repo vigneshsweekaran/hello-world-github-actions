@@ -5,6 +5,7 @@ on: workflow_dispatch
 env:
   MVN_TARGET_FOLDER: "target"
   MVN_WAR_FILE_NAME: "hello-world-*.war"
+  MVN_SETTINGS_PATH: "~/.m2/settings.xml"
 
 jobs:
   build-info:
@@ -62,6 +63,8 @@ jobs:
         with:
           path: ~/.m2/repository
           key: maven-dependencies
+      - name: Configure maven settings
+        run: echo ${{ secrets.MAVEN_SETTINGS }} > ${{ env.MVN_SETTINGS_PATH }}
       - name: Deploy to tomcat
         run: |
           mvn cargo:deploy
