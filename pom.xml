@@ -25,6 +25,22 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>11.0.15</version>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven3-plugin</artifactId>
+        <configuration>
+          <container>
+            <containerId>tomcat9x</containerId>
+            <type>remote</type>
+          </container>
+          <configuration>
+            <type>runtime</type>
+            <properties>
+              <cargo.server.settings>tomcat-server</cargo.server.settings>
+            </properties>
+          </configuration>
+        </configuration>
+       </plugin>
     </plugins>
   </build>
   <dependencies>
