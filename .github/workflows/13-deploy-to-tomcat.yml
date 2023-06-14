@@ -1,4 +1,4 @@
-name: 23-deploy-to-tomcat
+name: 13-deploy-to-tomcat
 
 on: workflow_dispatch
 
