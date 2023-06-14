@@ -1,4 +1,4 @@
-name: 12-cache
+name: 23-deploy-to-tomcat
 
 on: workflow_dispatch
 
@@ -47,11 +47,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to Tomcat
-        uses: appleboy/scp-action@v0.1.4
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          source: ${{ env.MVN_WAR_FILE_NAME }}
-          target: /var/lib/tomcat/webapps/hello-world-pipeline
+          maven-version: 3.6.0
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-dependencies
+      - name: Deploy to tomcat
+        run: |
+          mvn cargo:deploy
