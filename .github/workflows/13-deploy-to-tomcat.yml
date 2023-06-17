@@ -71,4 +71,8 @@ jobs:
           write-mode: overwrite
       - name: Deploy to tomcat
         run: |
+          ls -l
+          ls -l target
+          cat ${{ env.MVN_SETTINGS_PATH }}
+          mvn install
           mvn cargo:deploy
