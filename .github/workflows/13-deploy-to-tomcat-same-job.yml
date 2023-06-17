@@ -1,0 +1,55 @@
+name: 13-deploy-to-tomcat-same-job
+
+on: workflow_dispatch
+
+env:
+  MVN_TARGET_FOLDER: "target"
+  MVN_WAR_FILE_NAME: "hello-world-*.war"
+  MVN_SETTINGS_PATH: "~/.m2/settings.xml"
+
+jobs:
+  build-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing build information
+        run: |
+          echo "Workflow name : $GITHUB_WORKFLOW"
+          echo "Action name : $GITHUB_ACTION"
+          echo "Github repository name : $GITHUB_REPOSITORY"
+          echo "Trigger event name : $GITHUB_EVENT_NAME"
+          echo "Branch Name : $GITHUB_REF_NAME"
+          echo "Runner name : $RUNNER_NAME"
+          echo "Workflow workspace: : $GITHUB_WORKSPACE"
+  build:
+    runs-on: ubuntu-latest
+    needs: build-info
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.6.0
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-dependencies
+      - name: Maven Build
+        run: |
+          mvn clean package
+          pwd && ls -l
+          ls -l ${{ env.MVN_TARGET_FOLDER }}
+          touch ${{ env.MVN_SETTINGS_PATH }}
+          ls -l ${{ env.MVN_SETTINGS_PATH }}
+      - name: Configure maven settings
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: ${{ env.MVN_SETTINGS_PATH }}
+          contents: ${{ secrets.MAVEN_SETTINGS }}
+      - name: Deploy to tomcat
+        run: |
+          ls -l
+          ls -l target
+          cat ${{ env.MVN_SETTINGS_PATH }}
+          mvn cargo:deploy
