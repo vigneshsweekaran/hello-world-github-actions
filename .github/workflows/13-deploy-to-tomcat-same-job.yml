@@ -44,9 +44,11 @@ jobs:
           ls -l ${{ env.MVN_SETTINGS_PATH }}
       - name: Configure maven settings
         uses: DamianReeves/write-file-action@master
+        env:
+          MAVEN_SETTINGS_CONTENT: ${{ secrets.MAVEN_SETTINGS }}
         with:
           path: ${{ env.MVN_SETTINGS_PATH }}
-          contents: ${{ secrets.MAVEN_SETTINGS }}
+          contents: ${{ env.MAVEN_SETTINGS_CONTENT }}
       - name: Deploy to tomcat
         run: |
           ls -l
