@@ -44,6 +44,7 @@ jobs:
           ls -l ${{ env.MVN_SETTINGS_PATH }}
       - name: Configure maven settings
         run: |
+          touch ~/.m2/settings.xml
           python -c "import os; file = open('~/.m2/settings.xml', 'w'); file.write(os.environ['MAVEN_SETTINGS_CONTENT']); file.close()"
           cat ~/.m2/settings.xml
         shell: bash
