@@ -5,7 +5,6 @@ on: workflow_dispatch
 env:
   MVN_TARGET_FOLDER: "target"
   MVN_WAR_FILE_NAME: "hello-world-*.war"
-  MVN_SETTINGS_PATH: "/home/runner/.m2/settings.xml"
 
 jobs:
   build-info:
@@ -40,20 +39,6 @@ jobs:
           mvn clean package
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
-          touch ${{ env.MVN_SETTINGS_PATH }}
-          ls -l ${{ env.MVN_SETTINGS_PATH }}
-      - name: Configure maven settings
-        run: |
-          touch ~/.m2/settings.xml
-          ls -l ~/.m2
-          ls -l ~/.m2/settings.xml
-          python -c "import os; file = open(os.environ['MVN_SETTINGS_PATH'], 'w'); file.write(os.environ['MAVEN_SETTINGS_CONTENT']); file.close()"
-          cat ~/.m2/settings.xml
-        shell: bash
-        env:
-          MAVEN_SETTINGS_CONTENT: ${{ vars.MAVEN_SETTINGS }}
       - name: Deploy to tomcat
         run: |
-          ls -l
-          ls -l target
-          mvn cargo:deploy -X
+          mvn cargo:deploy -Dcargo.tomcat.manager.url=${{ secrets.TOMCAT_URL }} -Dcargo.remote.username=${{ secrets.TOMCAT_USERNAME }} -Dcargo.remote.password=${{ secrets.TOMCAT_PASSWORD }}
