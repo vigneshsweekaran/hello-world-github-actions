@@ -40,5 +40,7 @@ jobs:
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
       - name: Deploy to tomcat
+        env:
+          PASS: ${{ secrets.TOMCAT_PASSWORD }}
         run: |
-          mvn cargo:deploy -Dcargo.tomcat.manager.url="${{ secrets.TOMCAT_URL }}" -Dcargo.remote.username="${{ secrets.TOMCAT_USERNAME }}" -Dcargo.remote.password="${{ secrets.TOMCAT_PASSWORD }}"
+          mvn cargo:deploy -Dcargo.tomcat.manager.url="${{ secrets.TOMCAT_URL }}" -Dcargo.remote.username="${{ secrets.TOMCAT_USERNAME }}" -Dcargo.remote.password="${{ env.PASS }}"
