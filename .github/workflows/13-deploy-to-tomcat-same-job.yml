@@ -5,7 +5,7 @@ on: workflow_dispatch
 env:
   MVN_TARGET_FOLDER: "target"
   MVN_WAR_FILE_NAME: "hello-world-*.war"
-  MVN_SETTINGS_PATH: "~/.m2/settings.xml"
+  MVN_SETTINGS_PATH: "/home/runner/.m2/settings.xml"
 
 jobs:
   build-info:
@@ -47,7 +47,7 @@ jobs:
           touch ~/.m2/settings.xml
           ls -l ~/.m2
           ls -l ~/.m2/settings.xml
-          python -c "import os; file = open({{ env.MVN_SETTINGS_PATH }}, 'w'); file.write(os.environ['MAVEN_SETTINGS_CONTENT']); file.close()"
+          python -c "import os; file = open(os.environ['MVN_SETTINGS_PATH'], 'w'); file.write(os.environ['MAVEN_SETTINGS_CONTENT']); file.close()"
           cat ~/.m2/settings.xml
         shell: bash
         env:
