@@ -56,4 +56,4 @@ jobs:
         run: |
           ls -l
           ls -l target
-          mvn cargo:deploy
+          mvn cargo:deploy -X
