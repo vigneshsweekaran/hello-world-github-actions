@@ -43,11 +43,12 @@ jobs:
           touch ${{ env.MVN_SETTINGS_PATH }}
           ls -l ${{ env.MVN_SETTINGS_PATH }}
       - name: Configure maven settings
-        env:
-          MAVEN_SETTINGS_CONTENT: ${{ secrets.MAVEN_SETTINGS }}
         run: |
-          printf ${{ env.MAVEN_SETTINGS_CONTENT }} > ${{ env.MVN_SETTINGS_PATH }}
-          cat ${{ env.MVN_SETTINGS_PATH }}
+          python -c "import os; file = open('~/.m2/settings.xml', 'w'); file.write(os.environ['MAVEN_SETTINGS_CONTENT']); file.close()"
+          cat ~/.m2/settings.xml
+        shell: bash
+        env:
+          MAVEN_SETTINGS_CONTENT : ${{secrets.MAVEN_SETTINGS}}
       - name: Deploy to tomcat
         run: |
           ls -l
