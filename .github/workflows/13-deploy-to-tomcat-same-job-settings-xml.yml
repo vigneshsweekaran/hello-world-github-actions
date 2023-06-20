@@ -23,7 +23,7 @@ jobs:
           echo "Runner name : $RUNNER_NAME"
           echo "Workflow workspace: : $GITHUB_WORKSPACE"
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build-info
     steps:
       - name: Checkout
@@ -45,5 +45,5 @@ jobs:
       - name: Deploy to tomcat
         run: |
           mv settings.xml ${{ env.MVN_SETTINGS_PATH }}
-          ls -l ~
+          ls -la ~
           mvn cargo:deploy
