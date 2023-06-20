@@ -1,6 +1,8 @@
 name: 13-deploy-to-tomcat-same-job
 
-on: workflow_dispatch
+on: 
+  push:
+  workflow_dispatch:
 
 env:
   MVN_TARGET_FOLDER: "target"
