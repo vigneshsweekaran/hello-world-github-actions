@@ -1,7 +1,6 @@
 name: 14-deploy-to-tomcat-same-job
 
-on: 
-  push:
+on:
   workflow_dispatch:
 
 env:
