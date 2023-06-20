@@ -42,6 +42,7 @@ jobs:
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
       - name: Deploy to tomcat
+        env:
+          CARGO_ARGS: '-Dcargo.tomcat.manager.url=\"http://144.24.159.60:8080/manager/text" -Dcargo.remote.username="deployer" -Dcargo.remote.password="deployer"'
         run: |
-          set -x
-          mvn cargo:deploy -Dcargo.tomcat.manager.url="http://144.24.159.60:8080/manager/text" -Dcargo.remote.username="deployer" -Dcargo.remote.password="deployer"
+          mvn cargo:deploy ${{ env.CARGO_ARGS }}
