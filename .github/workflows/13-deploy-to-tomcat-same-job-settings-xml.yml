@@ -44,5 +44,5 @@ jobs:
       - name: Deploy to tomcat
         run: |
           mv settings.xml ${{ env.MVN_SETTINGS_PATH }}
-          mvn cargo:undeploy
+          mvn cargo:undeploy || true
           mvn cargo:deploy
