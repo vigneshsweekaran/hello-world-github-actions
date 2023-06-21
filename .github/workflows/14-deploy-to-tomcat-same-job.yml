@@ -21,7 +21,7 @@ jobs:
           echo "Runner name : $RUNNER_NAME"
           echo "Workflow workspace: : $GITHUB_WORKSPACE"
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: build-info
     steps:
       - name: Checkout
