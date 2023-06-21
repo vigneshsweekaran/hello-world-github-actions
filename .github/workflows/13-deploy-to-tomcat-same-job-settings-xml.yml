@@ -1,7 +1,6 @@
 name: 13-deploy-to-tomcat-same-job-settings-xml
 
-on: 
-  push:
+on:
   workflow_dispatch:
 
 env:
@@ -45,6 +44,5 @@ jobs:
       - name: Deploy to tomcat
         run: |
           mv settings.xml ${{ env.MVN_SETTINGS_PATH }}
-          ls -la ~
-          cat ${{ env.MVN_SETTINGS_PATH }}
+          mvn cargo:undeploy
           mvn cargo:deploy
