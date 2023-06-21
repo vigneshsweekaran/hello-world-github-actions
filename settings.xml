@@ -3,7 +3,7 @@
     <server>
       <id>tomcat-server</id>
       <configuration>
-        <cargo.tomcat.manager.url>http://144.24.159.60:8080/manager/text</cargo.tomcat.manager.url>
+        <cargo.remote.uri>http://20.198.114.1:8081/manager/text</cargo.remote.uri>
         <cargo.remote.username>deployer</cargo.remote.username>
         <cargo.remote.password>deployer</cargo.remote.password>
       </configuration>
