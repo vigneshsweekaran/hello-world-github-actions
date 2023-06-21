@@ -41,8 +41,11 @@ jobs:
           mvn clean package
           pwd && ls -l
           ls -l ${{ env.MVN_TARGET_FOLDER }}
-      - name: Deploy to tomcat
+      - name: Undeploy application on tomcat
+        continue-on-error: true
         run: |
           mv settings.xml ${{ env.MVN_SETTINGS_PATH }}
-          mvn cargo:undeploy || true
+          mvn cargo:undeploy
+      - name: Deploy to tomcat
+        run: |
           mvn cargo:deploy
